@@ -3,6 +3,7 @@ import * as bodyParser from "body-parser";
 import { TransactionRoutes } from "./routes/TransactionRoutes";
 import { UserRoutes } from "./routes/UserRoutes";
 import * as mongoose from "mongoose";
+import { CorsOptions } from "cors";
 
 class App {
   public app: express.Application;
@@ -25,6 +26,19 @@ class App {
     this.app.use(bodyParser.json());
     //support application/x-www-form-urlencoded post data
     this.app.use(bodyParser.urlencoded({ extended: false }));
+
+    var corsOptions: CorsOptions = {
+      origin: '*',
+      credentials: true,
+      allowedHeaders: '*',
+      // allowedHeaders: ['Access-Control-Allow-Headers', 'Access-Control-Allow-Origin', 'Origin', 'Content-Type', 'Authorization', 'Content-Length', 'X-Requested-With', 'Accept',  'Access-Control-Request-Method', 'Access-Control-Request-Headers'],
+      methods: ['GET', 'PUT', 'POST', 'DELETE', 'OPTIONS'],
+      optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+  }
+  var cors = require("cors");
+  this.app.use(cors(corsOptions));
+
+  
   }
 
   private mongoSetup(): void {
