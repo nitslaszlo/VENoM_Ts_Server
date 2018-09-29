@@ -50,7 +50,7 @@ export class UserController {
       password: req.body.password,
       isActive: req.body.isActive
     };
-    User.update(qry, doc, function(err, respRaw) {
+    User.updateOne(qry, doc, function(err, respRaw) {
       if (err) return console.log(err);
       res.status(200).json(respRaw);
     });
