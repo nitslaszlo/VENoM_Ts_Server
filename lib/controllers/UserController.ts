@@ -6,9 +6,6 @@ const User = mongoose.model("User", UserModel);
 
 export class UserController {
   public getUserById(req: Request, res: Response) {
-    // res.set("Access-Control-Allow-Origin", "*");
-    // res.set("Access-Control-Allow-Method", "POST, GET, OPTIONS, DELETE, PUT");
-    // res.set("Access-Control-Allow-Headers", "x-requested-with, Content-Type, origin, authorization, accept, client-security-token");
     if (mongoose.Types.ObjectId.isValid(req.params.id)) {
       User.findById(req.params.id, (err, user) => {
         if (err) {
@@ -24,9 +21,6 @@ export class UserController {
   }
 
   public getUserbyEmail(req: Request, res: Response) {
-    // res.set("Access-Control-Allow-Origin", "*");
-    // res.set("Access-Control-Allow-Method", "POST, GET, OPTIONS, DELETE, PUT");
-    // res.set("Access-Control-Allow-Headers", "x-requested-with, Content-Type, origin, authorization, accept, client-security-token");
     User.find({ email: req.params.email })
       .exec()
       .then(docs => res.status(200).json(docs))
